@@ -60,12 +60,3 @@ class VectorStore:
         print(f"[INFO] Querying vector store for: '{query_text}'")
         query_emb = self.model.encode([query_text]).astype('float32')
         return self.search(query_emb, top_k=top_k)
-
-
-if __name__ == "__main__":
-    from src.loader import loader
-    docs = loader("data")
-    store = VectorStore("faiss_store")
-    store.build_vectorstore(docs)
-    store.load()
-    print(store.query("Tell me about Armodrillo", top_k=3))
